@@ -2,22 +2,22 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class StreamCreate extends React.Component {
-  renderInput({ input, label }) {
+  renderInput({ input, label, meta }) {
+    // console.log(meta)
+
     return (
       <div className="field">
         <label>{label}</label>
         <input {...input} />
+        <div>{meta.error}</div>
       </div>
     );
   }
 
-  onSubmit(formValues) {  // not using event object when using redux-form. also no need for preventdefault call.
-    console.log(formValues);
+  onSubmit(formValues) { 
   }
 
   render () {
-    // console.log(this.props); //handleSubmit by redux-form
-
     return (
       <form onSubmit={this.props.handleSubmit(this.onSubmit)} className="ui form">
         <Field name="title" component={this.renderInput} label="Enter Title"/>
@@ -28,6 +28,22 @@ class StreamCreate extends React.Component {
   }
 }
 
+const validate = (formValues) => {
+  const errors = {};
+
+  if (!formValues.title) {
+    errors.title = 'Title must be entered.'
+  }
+
+  if (!formValues.description) {
+    errors.description = 'Description must be entered.'
+  }
+
+  return errors;
+};
+
 export default reduxForm({
-  form: 'streamCreate'
+  form: 'streamCreate',
+  // validate: validate
+  validate
 })(StreamCreate);
