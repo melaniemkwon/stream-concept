@@ -1,6 +1,6 @@
 {
   "name": "client",
-  "homepage": "https://melaniemkwon.github.io/stream-concept",
+  "homepage": "https://melaniemkwon.github.io/fake-REST",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
